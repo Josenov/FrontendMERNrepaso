@@ -3,7 +3,7 @@ import React from 'react'
 const Card = ( {name, country, image, description} ) => {
     return (
         <>
-            <div className='flex flex-wrap w-6/12'>
+            <div className='flex sm:flex-col flex-wrap justify-center items-center w-[700px] m-2'>
                 <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg my-4">
                     <img
                         alt={name}
