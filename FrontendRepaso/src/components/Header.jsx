@@ -1,9 +1,13 @@
 import { useState } from "react"
 import { Link as LinkRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
   let [show, setShow] = useState(false);
+
+  const photo = useSelector(store => store.userReducer.photo)
+  console.log(photo)
 
   const handleShowMenu = () => {
     setShow(!show)
@@ -21,10 +25,13 @@ const Header = () => {
             <LinkRouter to='/cities'>Cities</LinkRouter>
             <LinkRouter to='signin'>Sign In</LinkRouter>
             <LinkRouter href="">Contact</LinkRouter>
+            
           </div>
           : null
       }
+      
       <button onClick={handleShowMenu}>Show Menu</button>
+      <img className="w-[45px] h-[45px] object-cover rounded-full" src={photo} alt="" />
 
     </header>
   )

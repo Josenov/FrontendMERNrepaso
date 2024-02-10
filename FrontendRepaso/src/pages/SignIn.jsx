@@ -1,6 +1,30 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { user_photo } from '../store/actions/userActions';
 
 const SignIn = () => {
+    const dispatch = useDispatch();
+
+    const handleSignIn = () => {
+        //Simulamos que usuario se logueo correctamente
+        //Simulamos que se obtuvieron los datos del usuario (foto perfil)
+        //con el Dispatch enviamos esa info (dispara el evento del action)
+        //y que el reducer haga el cambio del estado
+
+
+        //Simulamos que esta es la imagen que viene de la BD
+        const userData = {
+            photo:'https://images.pagina12.com.ar/styles/focal_content_1200x1050/public/2023-01/692933-leo-20messi-20copa-20del-20mundo.jpeg?h=fcdc4171&itok=rWyK-jw9'
+        }
+
+        dispatch(user_photo(userData))
+
+
+
+
+    }
+
+
     return (
         <>
 
@@ -20,7 +44,7 @@ const SignIn = () => {
                         </p>
                     </div>
 
-                    <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+                    <div action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                         <div>
                             <label htmlFor="email" className="sr-only">Email</label>
 
@@ -92,13 +116,14 @@ const SignIn = () => {
                             </p>
 
                             <button
+                            onClick={handleSignIn}
                                 type="submit"
                                 className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
                             >
                                 Sign in
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
