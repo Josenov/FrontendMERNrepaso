@@ -6,8 +6,10 @@ const Header = () => {
 
   let [show, setShow] = useState(false);
 
-  const photo = useSelector(store => store.userReducer.photo)
-  console.log(photo)
+  const user = useSelector(store=>store.userReducer.user)
+  console.log(user)
+  const photoDefault = 'https://www.nicepng.com/png/full/128-1280406_view-user-icon-png-user-circle-icon-png.png'
+  
 
   const handleShowMenu = () => {
     setShow(!show)
@@ -23,7 +25,7 @@ const Header = () => {
           <div className="flex gap-8 font-bold text-gray-400">
             <LinkRouter to='/'>Home</LinkRouter>
             <LinkRouter to='/cities'>Cities</LinkRouter>
-            <LinkRouter to='signin'>Sign In</LinkRouter>
+            <LinkRouter to='signin'>{user?null:<h3>Sign in</h3>}</LinkRouter>
             <LinkRouter href="">Contact</LinkRouter>
             
           </div>
@@ -31,7 +33,7 @@ const Header = () => {
       }
       
       <button onClick={handleShowMenu}>Show Menu</button>
-      <img className="w-[45px] h-[45px] object-cover rounded-full" src={photo} alt="" />
+      <img className="w-[45px] h-[45px] object-cover rounded-full" src={user?user.image:photoDefault} alt="" />
 
     </header>
   )

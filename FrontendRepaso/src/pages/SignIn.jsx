@@ -1,23 +1,48 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { user_photo } from '../store/actions/userActions';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {user_login} from '../store/actions/userActions.js'
 
 const SignIn = () => {
+
+    const store = useSelector(store => store.userReducer);
+    console.log("viene del store",store)
+
+    const [formData, setFormData] = useState({
+        email:'',
+        password:''
+    });
+
+
     const dispatch = useDispatch();
 
-    const handleSignIn = () => {
-        //Simulamos que usuario se logueo correctamente
-        //Simulamos que se obtuvieron los datos del usuario (foto perfil)
-        //con el Dispatch enviamos esa info (dispara el evento del action)
-        //y que el reducer haga el cambio del estado
+    const handleInput = (event) =>{
+        //console.log(event.target.name,event.target.value)
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        })
+    }
 
+    console.log(formData)
 
-        //Simulamos que esta es la imagen que viene de la BD
-        const userData = {
+    const handleSignIn = async(event) => {
+        event.preventDefault();
+
+        try {
+            
+            dispatch(user_login({
+                data: formData
+            }))
+
+        } catch (error) {
+            console.error
+        }
+        
+        /* const userData = {
             photo:'https://images.pagina12.com.ar/styles/focal_content_1200x1050/public/2023-01/692933-leo-20messi-20copa-20del-20mundo.jpeg?h=fcdc4171&itok=rWyK-jw9'
         }
 
-        dispatch(user_photo(userData))
+        dispatch(user_photo(userData)) */
 
 
 
@@ -44,13 +69,15 @@ const SignIn = () => {
                         </p>
                     </div>
 
-                    <div action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+                    <form onSubmit={handleSignIn} action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                         <div>
                             <label htmlFor="email" className="sr-only">Email</label>
 
                             <div className="relative">
                                 <input
+                                    onChange={handleInput}
                                     type="email"
+                                    name="email"
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Enter email"
                                 />
@@ -79,7 +106,9 @@ const SignIn = () => {
 
                             <div className="relative">
                                 <input
+                                    onChange={handleInput}
                                     type="password"
+                                    name='password'
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Enter password"
                                 />
@@ -123,7 +152,7 @@ const SignIn = () => {
                                 Sign in
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">

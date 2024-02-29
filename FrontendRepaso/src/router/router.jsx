@@ -4,6 +4,7 @@ import Cities from '../pages/Cities'
 import Main from '../layout/Main'
 import SignIn from '../pages/SignIn'
 import CityDetails from '../pages/CityDetails'
+import ProtectedRoute from '../router/ProtectedRoute'
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,9 @@ const router = createBrowserRouter([
             },
             {
                 path:'/cities',
-                element: <Cities/>
+                element: 
+                            <Cities/> 
+                        
             },
             ,
             {
@@ -26,10 +29,12 @@ const router = createBrowserRouter([
             },
             {
                 path:'/signin',
-                element: <SignIn/>
+                element: (<ProtectedRoute path='/'>
+                                <SignIn/> 
+                        </ProtectedRoute>)
             },
             {
-                path:'*',
+                path:'/404',
                 element: <h1 className='text-3xl flex justify-center items-center h-screen'>
                             Pagina No Encontrada</h1>
             }
