@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {user_login} from '../store/actions/userActions.js'
+import GoogleSignIn from '../components/GoogleSignIn.jsx'
+
 
 const SignIn = () => {
 
@@ -37,6 +39,8 @@ const SignIn = () => {
         } catch (error) {
             console.error
         }
+
+        
         
         /* const userData = {
             photo:'https://images.pagina12.com.ar/styles/focal_content_1200x1050/public/2023-01/692933-leo-20messi-20copa-20del-20mundo.jpeg?h=fcdc4171&itok=rWyK-jw9'
@@ -137,6 +141,12 @@ const SignIn = () => {
                                 </span>
                             </div>
                         </div>
+
+                        <div className='flex justify-center items-center'>
+                        <GoogleSignIn />
+                        </div>
+
+                        
 
                         <div className="flex items-center justify-between">
                             <p className="text-sm text-gray-500">

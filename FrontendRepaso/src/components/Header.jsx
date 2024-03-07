@@ -1,8 +1,11 @@
 import { useState } from "react"
 import { Link as LinkRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {userSignOut} from '../store/actions/userActions'
 
 const Header = () => {
+
+  const dispatch = useDispatch();
 
   let [show, setShow] = useState(false);
 
@@ -33,7 +36,12 @@ const Header = () => {
       }
       
       <button onClick={handleShowMenu}>Show Menu</button>
-      <img className="w-[45px] h-[45px] object-cover rounded-full" src={user?user.image:photoDefault} alt="" />
+      <div className="flex items-center font-semibold text-sm gap-4">
+          <p>{user?user.name:null}</p>
+          <img className="w-[45px] h-[45px] object-cover rounded-full" src={user?user.image:photoDefault} alt="" />
+          <button onClick={()=> dispatch(userSignOut())}>{!user?null:"Log Out"}</button>
+      </div>
+      
 
     </header>
   )
