@@ -19,6 +19,13 @@ export const user_login = createAsyncThunk('user_login', async (obj)=>{
             localStorage.setItem('token',data.response.token)
             localStorage.setItem('user',JSON.stringify(data.response.user))
 
+            Swal.fire({
+                title: 'Welcome ' ,
+                text:data.message,
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            })
+
         return{
             user: data.response.user,
             token: data.response.token
@@ -28,9 +35,9 @@ export const user_login = createAsyncThunk('user_login', async (obj)=>{
         console.log(error);
         Swal.fire({
             title: 'Error!',
-            text: 'Do you want to continue',
+            text:error.response.data.message,
             icon: 'error',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Close'
         })
         return{
             user:null
